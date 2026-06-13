@@ -7,3 +7,7 @@ Thumbs.db
 ._*
 *.tmp
 node_modules/
+
+# secrets & per-user data — NEVER commit
+.env
+data/

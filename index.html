@@ -488,6 +488,22 @@
   .lguest{font-size:13px;color:var(--teal);font-weight:700;cursor:pointer}
   .avatar{cursor:pointer}
 
+  /* ====== SETTINGS ====== */
+  .gear{width:40px;height:40px;border-radius:13px;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;cursor:pointer;color:var(--teal);transition:.2s}
+  .gear:active{transform:scale(.95)}
+  .gear svg{width:19px;height:19px}
+  .srow{display:flex;align-items:center;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px 13px;margin-bottom:9px}
+  .srow .srow-ic{width:38px;height:38px;border-radius:11px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center;flex-shrink:0}
+  .srow .srow-ic svg{width:18px;height:18px}
+  .srow .bullet{width:38px;flex-shrink:0;text-align:center;color:var(--coral);font-size:22px;line-height:1}
+  .srow .srow-main{flex:1;min-width:0;font-size:12.5px;color:var(--muted)}
+  .srow .srow-main b{display:block;color:var(--ink);font-size:13.5px;font-weight:700;line-height:1.25}
+  .srow .srow-main small{font-size:11px;color:var(--muted);display:block;margin-top:2px}
+  .srow .del{flex-shrink:0;width:34px;height:34px;border-radius:10px;border:1px solid var(--line);background:var(--cream-2);color:var(--coral);display:grid;place-items:center;cursor:pointer;transition:.2s}
+  .srow .del:active{transform:scale(.92);background:var(--coral-soft)}
+  .srow .del svg{width:16px;height:16px}
+  .smuted{font-size:12.5px;color:var(--muted);padding:10px 2px}
+
   .coinlayer{position:absolute;inset:0;z-index:120;pointer-events:none;overflow:hidden}
   .coin{position:absolute;font-size:22px;animation:coinfly .9s ease-out forwards}
   @keyframes coinfly{0%{transform:translateY(0) scale(.5);opacity:0}15%{opacity:1}100%{transform:translateY(-160px) translateX(var(--cx,0)) scale(1.1) rotate(var(--cr,0));opacity:0}}
@@ -572,7 +588,10 @@
                 <div class="hi">Welcome back 👋</div>
                 <div class="name">Amara</div>
               </div>
-              <div class="avatar" onclick="logout()" title="Log out">A</div>
+              <div style="display:flex;gap:9px;align-items:center">
+                <button class="gear" onclick="go('settings')" title="Your details"><i data-lucide="settings"></i></button>
+                <div class="avatar" onclick="logout()" title="Log out">A</div>
+              </div>
             </div>
 
             <!-- hero match -->
@@ -874,6 +893,27 @@
           </div>
         </div>
 
+        <!-- ============ SETTINGS ============ -->
+        <div class="view" id="view-settings">
+          <div class="vhead">
+            <div class="back" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="#1C2B28" stroke-width="2"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h2>Your details</h2>
+            <p>Everything Landed holds about you. Remove anything you'd rather not store.</p>
+          </div>
+          <div class="pad">
+            <div class="sect-title"><h4>Your documents</h4><span id="docCount"></span></div>
+            <div id="docList"></div>
+
+            <div class="sect-title" style="margin-top:18px"><h4>About you</h4><span>from your chat</span></div>
+            <div id="infoList"></div>
+
+            <div class="nrpf" style="margin-top:16px">
+              <span class="w"><i data-lucide="shield-check"></i></span>
+              <p>Stored privately for this demo. Landed gives <b>information only</b>, not legal advice — for your case, check gov.uk and a regulated adviser.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- claim sheet -->
@@ -921,8 +961,9 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
   function icons(){ if(window.lucide && lucide.createIcons) lucide.createIcons(); }
-  const views = ['home','matches','upload','detail','community','story'];
+  const views = ['home','matches','upload','detail','community','story','settings'];
   const navMap = {home:'nav-home',matches:'nav-matches',community:'nav-community',story:'nav-profile'};
+  const currentUser = () => localStorage.getItem('landed_user') || 'guest';
   function go(v){
     views.forEach(x=>document.getElementById('view-'+x).classList.remove('active'));
     document.getElementById('view-'+v).classList.add('active');
@@ -931,6 +972,7 @@
     document.getElementById('viewport').scrollTop = 0;
     if(v==='matches'){ renderMap(); }
     if(v==='story'){ initStory(); }
+    if(v==='settings'){ openSettings(); }
   }
 
   /* ===================================================================
@@ -1228,6 +1270,45 @@
     renderMap();
   }
 
+  /* ============ SETTINGS (docs + stored info, deletable) ============ */
+  async function openSettings(){
+    const docList = document.getElementById('docList');
+    const infoList = document.getElementById('infoList');
+    if(!docList) return;
+    docList.innerHTML = '<div class="smuted">Loading…</div>'; infoList.innerHTML='';
+    try{
+      const r = await fetch('/api/profile?user=' + encodeURIComponent(currentUser()));
+      const data = await r.json();
+      const docs = data.documents || [];
+      document.getElementById('docCount').textContent = docs.length + ' on file';
+      docList.innerHTML = docs.length ? docs.map(d=>`
+        <div class="srow">
+          <div class="srow-ic"><i data-lucide="file-text"></i></div>
+          <div class="srow-main"><b>${escapeHtml(d.name)}</b><small>${escapeHtml(d.type||'')}${d.summary?' · '+escapeHtml(d.summary):''}</small></div>
+          <button class="del" title="Delete document" onclick="deleteDoc('${escapeHtml(d.id)}')"><i data-lucide="trash-2"></i></button>
+        </div>`).join('') : '<div class="smuted">No documents on file.</div>';
+
+      const info = data.info || [];
+      infoList.innerHTML = info.length ? info.map(b=>`
+        <div class="srow">
+          <div class="bullet">•</div>
+          <div class="srow-main"><b>${escapeHtml(b.value)}</b><small>${escapeHtml(b.label)}</small></div>
+          <button class="del" title="Delete" onclick="deleteInfo(${b.index})"><i data-lucide="trash-2"></i></button>
+        </div>`).join('') : '<div class="smuted">Nothing yet — chat with Landed in the Story tab and your answers appear here.</div>';
+      icons();
+    }catch(e){
+      docList.innerHTML = '<div class="smuted">Backend not reachable. Run <b>node server.js</b> to enable saved details.</div>';
+    }
+  }
+  async function deleteDoc(id){
+    await fetch('/api/profile/doc?user='+encodeURIComponent(currentUser())+'&id='+encodeURIComponent(id), {method:'DELETE'});
+    openSettings();
+  }
+  async function deleteInfo(index){
+    await fetch('/api/profile/info?user='+encodeURIComponent(currentUser())+'&index='+index, {method:'DELETE'});
+    openSettings();
+  }
+
   // benefits the engine hid because of the NRPF visa condition
   function renderQuestFoot(){
     const foot = document.getElementById('questfoot');
@@ -1273,11 +1354,13 @@
      agentRespond() with an LLM call that returns {updates, detected}.
   =================================================================== */
   let storySeeded = false;
+  let convo = [];
   function initStory(){
     const send = document.getElementById('chatSend');
     const input = document.getElementById('chatInput');
     if(!storySeeded){
-      botMsg(`👋 Hi, I'm <b>Landed</b>. Tell me your story — where you're from, your visa, whether you study or work, kids, money worries… in your own words. I'll work out what you're owed.`);
+      convo = [];
+      botMsg(`👋 Hi, I'm <b>Landed</b>. Tell me a bit about your situation — where you're from, your visa, whether you study or work, family, money — and I'll ask a few quick questions to work out what you may be entitled to.`);
       renderQuick(["I'm a student on a Tier 4 visa","I have 2 young kids","I rent a flat & work part-time","No recourse to public funds"]);
       storySeeded = true;
       if(send) send.onclick = sendStory;
@@ -1305,12 +1388,35 @@
     if(!text) return;
     meMsg(text); input.value='';
     document.getElementById('quickChips').innerHTML='';
+    convo.push({role:'user', content:text});
     typingOn();
-    setTimeout(()=>{ typingOff(); agentRespond(text); }, 850 + Math.random()*500);
+    backendRespond(text);
   }
 
-  // the "agent": extract → update profile → recompute → reply
-  function agentRespond(text){
+  // Claude-backed agent: server interviews the user (ENTITLED flow) + stores answers
+  async function backendRespond(text){
+    try{
+      const res = await fetch('/api/chat', {
+        method:'POST', headers:{'content-type':'application/json'},
+        body: JSON.stringify({ user: currentUser(), messages: convo })
+      });
+      const data = await res.json();
+      if(!res.ok || data.error) throw new Error(data.error || 'chat failed');
+      typingOff();
+      convo.push({role:'assistant', content:data.message});
+      let html = escapeHtml(data.message);
+      if(data.done) html += `<button class="gobtn" onclick="go('settings')">Review my details →</button>`;
+      botMsg(html);
+      renderQuick(data.done ? ['See my details','Actually, change an answer'] : []);
+    }catch(e){
+      // offline / no-backend fallback → local keyword agent
+      typingOff();
+      localAgentRespond(text);
+    }
+  }
+
+  // offline fallback "agent": local keyword extract → update profile → recompute → reply
+  function localAgentRespond(text){
     const {u, detected} = analyzeStory(text);
     if(!detected.length){
       botMsg(`I didn't quite catch the details there. Could you tell me a bit more — for example your <b>visa type</b>, whether you <b>study or work</b>, and whether money is <b>tight</b> right now?`);
@@ -1436,6 +1542,8 @@
   function enterApp(){
     const remember = document.querySelector('.lremember input');
     if(remember && remember.checked) localStorage.setItem('landed_auth','1');
+    const emailEl = document.querySelector('.login-card input[type="email"]');
+    localStorage.setItem('landed_user', (emailEl && emailEl.value.trim()) || 'guest');
     document.getElementById('login').classList.add('hidden');
     go('home');
   }
