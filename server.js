@@ -63,10 +63,11 @@ const OUTPUT_SCHEMA = {
         type: 'object', additionalProperties: false,
         properties: {
           key:   { type: 'string', enum: FIELD_KEYS },
+          code:  { type: 'string' },
           label: { type: 'string' },
           value: { type: 'string' }
         },
-        required: ['key', 'label', 'value']
+        required: ['key', 'code', 'label', 'value']
       }
     },
     done: { type: 'boolean' }
@@ -109,23 +110,25 @@ function readInfoLines(u) {
 function writeInfoLines(u, lines) {
   fs.writeFileSync(infoPath(u), lines.join('\n').replace(/\n+$/, '') + '\n');
 }
-// parsed bullets: [{ index, key, label, value, raw }]
+// parsed bullets: [{ index, key, code, label, value }]
 function parseInfo(u) {
   const out = [];
   readInfoLines(u).forEach((line, i) => {
-    const m = line.match(/^- \*\*(.+?):\*\*\s*(.*)$/);
-    if (m) out.push({ index: i, label: m[1], value: m[2], raw: line });
+    const m = line.match(/^- \*\*(.+?):\*\*\s*(.*?)\s*(?:<!--([a-z]+)(?::([^>]*))?-->)?\s*$/);
+    if (m && line.trimStart().startsWith('- ')) {
+      out.push({ index: i, label: m[1], value: (m[2] || '').trim(), key: m[3] || null, code: m[4] || null });
+    }
   });
   return out;
 }
-// add or replace a fact (dedupe by key, stored in an HTML comment marker)
+// add or replace a fact (dedupe by canonical key; key + code stored in a marker)
 function upsertFact(u, fact) {
   const lines = readInfoLines(u);
-  const marker = `<!--${fact.key}-->`;
+  const marker = `<!--${fact.key}${fact.code ? ':' + fact.code : ''}-->`;
   const newLine = `- **${fact.label}:** ${fact.value} ${marker}`;
   let replaced = false;
   for (let i = 0; i < lines.length; i++) {
-    if (lines[i].includes(marker)) { lines[i] = newLine; replaced = true; break; }
+    if (lines[i].includes(`<!--${fact.key}`)) { lines[i] = newLine; replaced = true; break; }
   }
   if (!replaced) {
     if (!lines.length) lines.push('# What you told Landed', '');
@@ -133,13 +136,9 @@ function upsertFact(u, fact) {
   }
   writeInfoLines(u, lines);
 }
-// strip the dedupe marker for display
+// public view: includes canonical key + code so the UI can render live controls
 function publicInfo(u) {
-  return parseInfo(u).map(b => ({
-    index: b.index,
-    label: b.label,
-    value: b.value.replace(/\s*<!--[a-z]+-->\s*$/i, '').trim()
-  }));
+  return parseInfo(u).map(b => ({ index: b.index, label: b.label, value: b.value, key: b.key, code: b.code }));
 }
 function deleteInfoLine(u, index) {
   const lines = readInfoLines(u);
@@ -151,8 +150,7 @@ function buildSystemPrompt(docs, info) {
   const knownFromDocs = {};
   docs.forEach(d => Object.assign(knownFromDocs, d.facts || {}));
   const collected = {};
-  parseInfo('').length; // noop
-  info.forEach(b => { const k = guessKey(b.label); if (k) collected[k] = b.value; });
+  info.forEach(b => { const k = b.key || guessKey(b.label); if (k) collected[k] = b.value; });
 
   const knownKeys = new Set([...Object.keys(knownFromDocs), ...Object.keys(collected)]);
   const needed = FIELD_KEYS.filter(k => !knownKeys.has(k));
@@ -187,7 +185,7 @@ How to behave:
 - Information only — you are NOT giving legal advice. UK immigration advice is regulated. If the user asks what they should DO, give general information and gently point them to gov.uk and a regulated adviser (gov.uk/find-an-immigration-adviser), then continue.
 - When all five fields are known, set "done": true and give a short, encouraging wrap-up: tell them you've saved their answers and they can review or delete any of them on the Settings page, and that Landed will use this to surface what they may be entitled to.
 
-Respond ONLY as JSON matching the required schema: { "message": string, "facts": [{ "key", "label", "value" }], "done": boolean }. "facts" holds any NEW canonical facts you learned THIS turn (empty array if none).`;
+Respond ONLY as JSON matching the required schema: { "message": string, "facts": [{ "key", "code", "label", "value" }], "done": boolean }. "facts" holds any NEW canonical facts you learned THIS turn (empty array if none). "code" is the EXACT canonical value from the allowed list for that field (e.g. "3-5", "low", "student", "born10"); "value" is the friendly human phrase you'd show the user (e.g. "5–10 years", "Low income / money is tight").`;
 }
 
 // best-effort: map a stored label back to a field key
@@ -266,10 +264,26 @@ const server = http.createServer(async (req, res) => {
     return send(res, 200, { documents: readDocs(user), info: publicInfo(user) });
   }
 
+  // upsert a single fact directly from the Interactive Settings controls
+  if (p === '/api/profile/info' && req.method === 'POST') {
+    const { user, key, code, label, value } = await readBody(req);
+    if (key && label && value !== undefined && value !== null) {
+      upsertFact(user, { key, code: code || '', label, value: String(value) });
+    }
+    return send(res, 200, { ok: true, info: publicInfo(user) });
+  }
+
   if (p === '/api/profile/info' && req.method === 'DELETE') {
     const user = url.searchParams.get('user');
     deleteInfoLine(user, parseInt(url.searchParams.get('index'), 10));
     return send(res, 200, { ok: true, info: publicInfo(user) });
+  }
+
+  // wipe everything for a user (General settings → delete all my data)
+  if (p === '/api/profile/all' && req.method === 'DELETE') {
+    const user = url.searchParams.get('user');
+    try { fs.rmSync(userDir(user), { recursive: true, force: true }); } catch (_) {}
+    return send(res, 200, { ok: true });
   }
 
   if (p === '/api/profile/doc' && req.method === 'DELETE') {

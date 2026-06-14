@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Landed — Benefits, found.</title>
+<link rel="icon" type="image/png" href="assets/logo.svg">
+<link rel="apple-touch-icon" href="assets/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -44,8 +46,8 @@
   /* ---- side intro ---- */
   .intro{max-width:300px;color:#EAF1ED}
   .intro .logo{display:flex;align-items:center;gap:10px;margin-bottom:22px}
-  .intro .logo .mark{width:34px;height:34px;border-radius:11px;background:linear-gradient(150deg,var(--coral),var(--gold));display:grid;place-items:center;box-shadow:0 8px 22px -8px rgba(226,104,60,.7)}
-  .intro .logo .mark svg{width:19px;height:19px}
+  .intro .logo .mark{width:36px;height:36px;border-radius:11px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 22px -8px rgba(226,104,60,.45)}
+  .intro .logo .mark img{width:100%;height:100%;object-fit:cover;display:block}
   .intro .logo b{font-family:'Fraunces',serif;font-size:23px;letter-spacing:.3px}
   .intro h1{font-family:'Fraunces',serif;font-weight:500;font-size:33px;line-height:1.15;margin-bottom:16px}
   .intro h1 em{font-style:italic;color:var(--gold)}
@@ -291,50 +293,84 @@
   .float-note b{color:var(--gold)}
 
   /* ====== QUEST / LEVEL MAP ====== */
-  .pot{position:sticky;top:0;z-index:20;margin:6px 16px 4px;display:flex;align-items:center;gap:12px;
-    background:linear-gradient(150deg,#114c44,#0c3a34);color:#EAF1ED;border-radius:20px;padding:13px 15px;
-    box-shadow:0 14px 30px -16px rgba(14,67,60,.95)}
-  .pot::after{content:"";position:absolute;right:-20px;top:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(217,164,65,.3),transparent 70%);pointer-events:none}
-  .pot-l{display:flex;align-items:center;gap:11px;position:relative;z-index:2}
-  .pot .pig{width:46px;height:46px;border-radius:14px;background:linear-gradient(150deg,var(--gold),var(--coral));display:grid;place-items:center;font-size:24px;box-shadow:0 8px 18px -8px rgba(226,104,60,.8);flex-shrink:0}
-  .pot small{font-size:9.5px;letter-spacing:.5px;color:#9fc0b7;font-weight:700;display:block}
-  .pot b#potAmt{font-family:'Fraunces',serif;font-size:25px;font-weight:600;color:#f4e3bd;line-height:1.05;display:block}
-  .pot-r{margin-left:auto;text-align:right;position:relative;z-index:2;min-width:96px}
-  .potprog{height:8px;border-radius:50px;background:rgba(255,255,255,.14);overflow:hidden;margin-bottom:6px}
-  .potprog i{display:block;height:100%;width:0;border-radius:50px;background:linear-gradient(90deg,var(--gold),#7be0a0);transition:width .6s cubic-bezier(.5,1.4,.5,1)}
-  .pot-r span{font-size:10px;color:#9fc0b7;font-weight:700}
-  .pot .reset{position:absolute;top:8px;right:10px;z-index:3;width:22px;height:22px;border-radius:7px;border:none;background:rgba(255,255,255,.12);color:#cfe0d8;font-size:12px;cursor:pointer;display:grid;place-items:center}
+  .pot{position:sticky;top:0;z-index:20;margin:6px 16px 6px;display:flex;align-items:center;gap:12px;
+    background:linear-gradient(150deg,#16635a 0%,#0e433c 55%,#0a322d 100%);color:#EAF1ED;border-radius:22px;padding:14px 16px;
+    box-shadow:0 16px 34px -16px rgba(14,67,60,.95), inset 0 1px 0 rgba(255,255,255,.14);overflow:hidden}
+  .pot::before{content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.10),transparent 40%)}
+  .pot::after{content:"";position:absolute;right:-26px;top:-34px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,110,.34),transparent 68%);pointer-events:none}
+  .pot-l{display:flex;align-items:center;gap:12px;position:relative;z-index:2}
+  .pot .pig{width:50px;height:50px;border-radius:15px;background:linear-gradient(160deg,#ffd877,#e2683c);display:grid;place-items:center;color:#4a2a06;flex-shrink:0;
+    box-shadow:0 9px 18px -7px rgba(226,104,60,.9), inset 0 -4px 8px -2px rgba(120,50,0,.35), inset 0 3px 6px -1px rgba(255,255,255,.6)}
+  .pot small{font-size:9px;letter-spacing:.6px;color:#a9cfc4;font-weight:800;display:block;text-transform:uppercase}
+  .pot b#potAmt{font-family:'Fraunces',serif;font-size:27px;font-weight:600;color:#ffe7b0;line-height:1.05;display:block;text-shadow:0 2px 6px rgba(0,0,0,.28)}
+  .pot-r{margin-left:auto;text-align:right;position:relative;z-index:2;min-width:104px}
+  .potprog{height:11px;border-radius:50px;background:rgba(0,0,0,.22);overflow:hidden;margin-bottom:7px;position:relative;box-shadow:inset 0 1px 2px rgba(0,0,0,.35)}
+  .potprog i{display:block;height:100%;width:0;border-radius:50px;background:linear-gradient(90deg,#ffd76a,#7be0a0);transition:width .7s cubic-bezier(.5,1.5,.5,1);box-shadow:0 0 10px rgba(255,210,110,.5);position:relative;overflow:hidden}
+  .potprog i::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);transform:translateX(-100%);animation:sheen 2.6s ease-in-out infinite}
+  @keyframes sheen{0%{transform:translateX(-100%)}60%,100%{transform:translateX(220%)}}
+  .pot-r span{font-size:10px;color:#a9cfc4;font-weight:800;letter-spacing:.2px}
+  .pot .reset{position:absolute;top:9px;right:11px;z-index:3;width:24px;height:24px;border-radius:8px;border:none;background:rgba(255,255,255,.14);color:#dcebe4;font-size:12px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+  .pot .reset:active{transform:scale(.9) rotate(-40deg)}
 
-  .levelmap{position:relative;margin:12px 10px 0;width:auto;border-radius:24px;background:#fbf6ec;box-shadow:inset 0 0 0 1px rgba(231,222,207,.7)}
-  .levelmap::before{content:"";position:absolute;inset:0;z-index:0;border-radius:24px;
-    background:url('assets/quest-bg-1.png') top center/cover no-repeat;opacity:.42}
-  .levelmap::after{content:"";position:absolute;inset:0;z-index:0;border-radius:24px;pointer-events:none;
-    background:linear-gradient(180deg,rgba(247,241,231,.66) 0%,rgba(247,241,231,.10) 24%,rgba(247,241,231,.10) 74%,rgba(247,241,231,.80) 100%)}
+  /* ---- world / board label ---- */
+  .boardlabel{display:inline-flex;align-items:center;gap:6px;margin:2px 0 0 16px;padding:6px 13px;border-radius:50px;
+    background:linear-gradient(150deg,#114c44,#0c3a34);color:#ffe7b0;font-size:11.5px;font-weight:800;letter-spacing:.3px;
+    box-shadow:0 8px 18px -10px rgba(14,67,60,.9)}
+  .boardlabel svg{width:13px;height:13px;color:#ffd76a}
+
+  /* ---- the game board ---- */
+  .levelmap{position:relative;margin:8px 10px 0;width:auto;border-radius:26px;overflow:hidden;
+    background:linear-gradient(180deg,#eaf3ec,#f3ecdd);box-shadow:0 18px 40px -22px rgba(28,43,40,.5), inset 0 0 0 2px rgba(255,255,255,.6), inset 0 0 0 4px rgba(216,205,182,.55)}
+  .levelmap::before{content:"";position:absolute;inset:0;z-index:0;
+    background:var(--board, url('assets/quest-bg-1.png')) top center/cover no-repeat;opacity:.66}
+  .levelmap::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(120% 55% at 50% 0%, transparent 60%, rgba(28,43,40,.12) 100%),
+      linear-gradient(180deg,rgba(243,236,221,.5) 0%,rgba(243,236,221,.03) 22%,rgba(243,236,221,.03) 80%,rgba(243,236,221,.42) 100%)}
   .levelmap svg.track{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:visible}
-  .levelmap svg .seg{fill:none;stroke:#E2D8C4;stroke-width:7;stroke-linecap:round;stroke-dasharray:1 14}
-  .levelmap svg .seg.lit{stroke:url(#litgrad);stroke-dasharray:none;stroke-width:8;opacity:.95}
+  .road-casing{fill:none;stroke:#d8cba8;stroke-width:20;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+  .road-base{fill:none;stroke:#fdf8ee;stroke-width:13;stroke-linecap:round;stroke-linejoin:round}
+  .road-dots{fill:none;stroke:#cbbd9b;stroke-width:3.4;stroke-linecap:round;stroke-dasharray:0.1 17}
+  .road-lit{fill:none;stroke:url(#litgrad);stroke-width:14;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 5px rgba(226,150,60,.55))}
+  .road-lit-dots{fill:none;stroke:rgba(255,255,255,.7);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:0.1 17}
 
   .lvl{position:absolute;z-index:2;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;cursor:pointer}
-  .lvl .face{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;font-size:27px;position:relative;
-    border:3px solid #fff;box-shadow:0 9px 18px -7px rgba(28,43,40,.55), inset 0 -5px 10px -4px rgba(0,0,0,.2)}
-  .lvl .face::before{content:"";position:absolute;top:8px;left:13px;width:20px;height:13px;border-radius:50%;background:rgba(255,255,255,.45);filter:blur(2px)}
-  .lvl .lnum{position:absolute;bottom:-5px;right:-5px;width:23px;height:23px;border-radius:50%;background:#fff;border:2px solid var(--line);color:var(--ink);font-size:11px;font-weight:800;display:grid;place-items:center;font-family:'Fraunces',serif;box-shadow:0 3px 6px -2px rgba(0,0,0,.3)}
-  .lvl .stars{position:absolute;top:-15px;left:50%;transform:translateX(-50%);display:flex;gap:1px;font-size:13px;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
-  .lvl .award{margin-top:9px;font-size:10.5px;font-weight:800;color:var(--teal);background:#fff;border:1px solid var(--line);padding:3px 9px;border-radius:50px;white-space:nowrap;box-shadow:0 4px 10px -5px rgba(0,0,0,.3)}
-  .lvl .award.win{color:var(--green);border-color:#bfe6cb;background:var(--green-soft)}
+  .lvl .face{width:72px;height:72px;border-radius:50%;display:grid;place-items:center;position:relative;color:#fff;border:4px solid #fff;
+    box-shadow:0 11px 18px -7px rgba(28,43,40,.55), 0 0 0 6px rgba(255,255,255,.45), inset 0 -7px 13px -3px rgba(0,0,0,.3), inset 0 6px 11px -2px rgba(255,255,255,.5);
+    transition:transform .14s}
+  .lvl:not(.now):active .face{transform:scale(.92)}
+  .lvl .face::before{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:44px;height:20px;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,0));filter:blur(1px)}
+  .lvl .lnum{position:absolute;bottom:-7px;right:-7px;width:27px;height:27px;border-radius:50%;background:linear-gradient(160deg,#ffd877,#e0a23a);border:2.5px solid #fff;color:#5a3d05;font-size:12.5px;font-weight:800;display:grid;place-items:center;font-family:'Fraunces',serif;box-shadow:0 3px 7px -2px rgba(0,0,0,.45)}
+  .lvl .stars{position:absolute;top:-22px;left:50%;transform:translateX(-50%);display:flex;gap:2px;z-index:4}
+  .lvl .stars i{display:grid;place-items:center}
+  .lvl .stars i:nth-child(1){transform:translateY(4px) rotate(-16deg)}
+  .lvl .stars i:nth-child(3){transform:translateY(4px) rotate(16deg)}
+  .lvl .award{margin-top:14px;font-size:11px;font-weight:800;color:#7a5a12;background:linear-gradient(180deg,#fffaf0,#fbeec8);border:1.5px solid #ecd9a8;padding:4px 12px;border-radius:50px;white-space:nowrap;box-shadow:0 6px 13px -6px rgba(0,0,0,.35)}
+  .lvl .award.win{color:#2f8a55;background:linear-gradient(180deg,#eefbf2,#d6f0df);border-color:#bce3c9}
 
   /* states */
-  .lvl.done .face{background:linear-gradient(150deg,#4bb474,#2f8a55)}
+  .lvl.done .face{background:linear-gradient(160deg,#5cc081,#2f8a55)}
   .lvl.locked{cursor:not-allowed}
-  .lvl.locked .face{background:linear-gradient(150deg,#d9cfbd,#c2b69f);border-color:#efe9dd;box-shadow:0 6px 12px -7px rgba(28,43,40,.4)}
-  .lvl.locked .face::before{display:none}
-  .lvl.locked .award{color:var(--muted);background:var(--cream-2)}
-  .lvl.now{z-index:5}
-  .lvl.now .face{animation:bob 1.4s ease-in-out infinite}
-  .lvl.now .ring{position:absolute;inset:-9px;border-radius:50%;border:3px solid var(--coral);animation:pulsering 1.6s ease-out infinite}
-  .lvl.now .play{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:var(--coral);color:#fff;font-size:9px;font-weight:800;letter-spacing:.5px;padding:3px 9px;border-radius:50px;box-shadow:0 5px 12px -4px rgba(226,104,60,.9);white-space:nowrap}
-  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-  @keyframes pulsering{0%{transform:scale(1);opacity:.9}100%{transform:scale(1.55);opacity:0}}
+  .lvl.locked .face{background:linear-gradient(160deg,#dcd2c0,#b6a888);border-color:#f1ece1;filter:saturate(.6);
+    box-shadow:0 7px 13px -8px rgba(28,43,40,.45), 0 0 0 6px rgba(255,255,255,.4), inset 0 -5px 10px -3px rgba(0,0,0,.18)}
+  .lvl.locked .face::before{opacity:.5}
+  .lvl.locked .lnum{background:linear-gradient(160deg,#ece3d2,#cabda3);color:#8a7d63}
+  .lvl.locked .award{color:var(--muted);background:var(--cream-2);border-color:var(--line)}
+  .lvl.now{z-index:6}
+  .lvl.now .face{animation:bob 1.5s ease-in-out infinite;
+    box-shadow:0 12px 20px -7px rgba(28,43,40,.5), 0 0 0 6px rgba(255,255,255,.5), 0 0 26px 5px rgba(226,104,60,.5), inset 0 -7px 13px -3px rgba(0,0,0,.3), inset 0 6px 11px -2px rgba(255,255,255,.55)}
+  .lvl.now .ring{position:absolute;inset:-10px;border-radius:50%;border:3px solid rgba(226,104,60,.75);animation:pulsering 1.9s ease-out infinite;pointer-events:none}
+  .lvl.now .ring.r2{animation-delay:.95s}
+  .lvl.now .play{position:absolute;top:-31px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#ef7f55,#d9542a);color:#fff;font-size:9.5px;font-weight:800;letter-spacing:.6px;padding:5px 11px;border-radius:50px;box-shadow:0 7px 14px -5px rgba(226,104,60,.95), inset 0 1px 0 rgba(255,255,255,.4);white-space:nowrap;display:flex;align-items:center;animation:bobtag 1.5s ease-in-out infinite}
+  .lvl.now .play::after{content:"";position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#d9542a;border-bottom:0}
+
+  /* grand-prize finish node */
+  .lvl.finish .face{width:80px;height:80px;background:linear-gradient(160deg,#ffd877,#e0a23a);color:#5a3d05;border-color:#fff;
+    box-shadow:0 14px 22px -8px rgba(180,120,20,.7), 0 0 0 6px rgba(255,255,255,.5), 0 0 28px 4px rgba(255,200,90,.6), inset 0 -7px 13px -3px rgba(150,90,0,.35), inset 0 6px 11px -2px rgba(255,255,255,.6)}
+  .lvl.finish .finbanner{position:absolute;top:-20px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#114c44,#0c3a34);color:#ffe7b0;font-size:8.5px;font-weight:800;letter-spacing:.8px;padding:4px 11px;border-radius:50px;white-space:nowrap;box-shadow:0 6px 12px -5px rgba(0,0,0,.5);z-index:4}
+
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  @keyframes bobtag{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-4px)}}
+  @keyframes pulsering{0%{transform:scale(1);opacity:.85}100%{transform:scale(1.65);opacity:0}}
   .lvl.shake{animation:shakeit .4s}
   @keyframes shakeit{0%,100%{transform:translate(-50%,-50%)}25%{transform:translate(-58%,-50%)}75%{transform:translate(-42%,-50%)}}
 
@@ -412,12 +448,12 @@
   [data-lucide]{display:inline-flex;align-items:center;justify-content:center}
   .lucide{stroke-width:2;width:1em;height:1em}
   /* quest nodes */
-  .lvl .face{color:#fff}
-  .lvl .face svg{width:30px;height:30px;stroke-width:2.1}
-  .lvl .lnum{color:var(--ink)}
-  .lvl .lnum svg{width:12px;height:12px;stroke-width:2.6}
-  .lvl .stars svg{width:14px;height:14px;color:#E8B84B;fill:#E8B84B;stroke:#E8B84B}
-  .lvl .play svg{width:10px;height:10px;fill:#fff;stroke:#fff;margin-right:3px}
+  .lvl .face svg{width:32px;height:32px;stroke-width:2.2;filter:drop-shadow(0 1px 1px rgba(0,0,0,.25))}
+  .lvl .lnum svg{width:13px;height:13px;stroke-width:2.6;color:#5a3d05}
+  .lvl .stars i:nth-child(2) svg{width:19px;height:19px}
+  .lvl .stars svg{width:15px;height:15px;color:#ffce4d;fill:#ffce4d;stroke:#e0a23a;stroke-width:1.4;filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+  .lvl .play svg{width:11px;height:11px;fill:#fff;stroke:#fff;margin-right:3px}
+  .lvl.finish .face svg{width:38px;height:38px;color:#5a3d05}
   .sheet .sico{color:#fff}
   .sheet .sico svg{width:30px;height:30px}
   .blk .bk svg{width:18px;height:18px;color:#5b6a62}
@@ -455,8 +491,8 @@
   .login-top{flex-shrink:0;padding:62px 30px 22px;color:#EAF1ED;position:relative;overflow:hidden}
   .login-top::after{content:"";position:absolute;right:-30px;top:-20px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle,rgba(226,104,60,.3),transparent 70%)}
   .lbrand{display:flex;align-items:center;gap:11px;margin-bottom:24px;position:relative;z-index:2}
-  .lmark{width:38px;height:38px;border-radius:12px;background:linear-gradient(150deg,var(--coral),var(--gold));display:grid;place-items:center;box-shadow:0 8px 22px -8px rgba(226,104,60,.7)}
-  .lmark svg{width:21px;height:21px}
+  .lmark{width:40px;height:40px;border-radius:12px;overflow:hidden;flex-shrink:0;box-shadow:0 8px 22px -8px rgba(226,104,60,.45)}
+  .lmark img{width:100%;height:100%;object-fit:cover;display:block}
   .lbrand b{font-family:'Fraunces',serif;font-size:25px;letter-spacing:.3px}
   .login-top h1{font-family:'Fraunces',serif;font-weight:500;font-size:32px;line-height:1.12;margin-bottom:10px;position:relative;z-index:2}
   .login-top h1 em{font-style:italic;color:var(--gold)}
@@ -504,6 +540,84 @@
   .srow .del svg{width:16px;height:16px}
   .smuted{font-size:12.5px;color:var(--muted);padding:10px 2px}
 
+  /* ---- settings tabs ---- */
+  .settabs{display:flex;gap:6px;background:var(--cream-2);border:1px solid var(--line);border-radius:15px;padding:5px;margin-bottom:16px}
+  .settab{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;border:none;background:transparent;padding:11px;border-radius:11px;font-family:'Hanken Grotesk';font-weight:700;font-size:13px;color:var(--muted);cursor:pointer;transition:.2s}
+  .settab svg{width:15px;height:15px}
+  .settab.on{background:var(--paper);color:var(--teal);box-shadow:0 5px 12px -7px rgba(0,0,0,.35)}
+
+  /* ---- interactive banner + live result ---- */
+  .ibanner{display:flex;gap:12px;align-items:center;background:linear-gradient(150deg,#fbf3e6,#fff);border:1px solid #ecd9a8;border-radius:18px;padding:14px 15px;margin-bottom:13px}
+  .ibanner .ib-ic{width:42px;height:42px;border-radius:13px;background:linear-gradient(150deg,var(--gold),var(--coral));color:#fff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 8px 16px -8px rgba(226,104,60,.7)}
+  .ibanner .ib-ic svg{width:21px;height:21px}
+  .ibanner b{font-family:'Fraunces',serif;font-size:15px;color:var(--ink);display:block;line-height:1.2}
+  .ibanner span{font-size:11.5px;color:var(--muted);line-height:1.45}
+  .iresult{display:flex;align-items:center;gap:14px;background:linear-gradient(150deg,#114c44,#0c3a34);color:#EAF1ED;border-radius:18px;padding:15px 16px;position:relative;overflow:hidden;box-shadow:0 14px 30px -16px rgba(14,67,60,.95)}
+  .iresult::after{content:"";position:absolute;right:-20px;top:-30px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,110,.3),transparent 70%)}
+  .iresult .ir-num{font-family:'Fraunces',serif;font-size:38px;font-weight:600;color:#ffe7b0;line-height:1;position:relative;z-index:2;min-width:46px;text-align:center;transition:.3s}
+  .iresult .ir-main{flex:1;position:relative;z-index:2}
+  .iresult .ir-main b{font-size:13px;color:#EAF1ED;display:block;font-weight:700}
+  .iresult .ir-main span{font-size:11.5px;color:#a9cfc4}
+  .iresult .ir-main span b{display:inline;color:#ffe7b0;font-size:11.5px}
+  .iresult .ir-go{position:relative;z-index:2;display:inline-flex;align-items:center;gap:5px;background:var(--coral);color:#fff;border:none;border-radius:12px;padding:9px 13px;font-family:'Hanken Grotesk';font-weight:800;font-size:12px;cursor:pointer;box-shadow:0 8px 16px -8px rgba(226,104,60,.8)}
+  .iresult .ir-go svg{width:14px;height:14px}
+  .iflash{animation:iflash .5s}
+  @keyframes iflash{0%{transform:scale(1)}40%{transform:scale(1.25);color:#fff}100%{transform:scale(1)}}
+
+  /* ---- dynamic controls ---- */
+  .dfacts{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+  .dfact{font-size:10.5px;font-weight:700;background:var(--teal-soft);color:var(--teal);padding:3px 8px;border-radius:50px}
+  .dfact.muted{background:var(--cream);color:var(--muted)}
+  .imeter{display:flex;align-items:center;gap:10px;margin:0 2px 13px}
+  .imeter-bar{flex:1;height:8px;border-radius:50px;background:var(--cream-2);border:1px solid var(--line);overflow:hidden}
+  .imeter-bar i{display:block;height:100%;border-radius:50px;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .55s cubic-bezier(.5,1.4,.5,1)}
+  .imeter span{font-size:11px;font-weight:800;color:var(--muted);white-space:nowrap}
+
+  .ctrl{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:13px 14px;margin-bottom:10px}
+  .ctrl-h{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+  .ctrl-ic{width:34px;height:34px;border-radius:10px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center;flex-shrink:0}
+  .ctrl-ic svg{width:17px;height:17px}
+  .ctrl-t{flex:1;min-width:0}
+  .ctrl-t b{font-size:13.5px;color:var(--ink);font-weight:700;display:block;line-height:1.2}
+  .csrc{font-size:10.5px;font-weight:700;color:var(--green);display:inline-flex;align-items:center;gap:3px;margin-top:1px}
+  .csrc svg{width:11px;height:11px}
+  .csrc.doc{color:var(--teal-2)}
+  .csrc.none{color:var(--muted)}
+  .cclear{flex-shrink:0;width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--cream-2);color:var(--muted);display:grid;place-items:center;cursor:pointer}
+  .cclear svg{width:14px;height:14px}
+
+  /* sliding segmented control */
+  .seg{position:relative;display:flex;background:var(--cream-2);border:1px solid var(--line);border-radius:13px;padding:4px}
+  .seg .seg-ind{position:absolute;top:4px;bottom:4px;left:4px;width:calc((100% - 8px)/var(--n));border-radius:9px;
+    background:linear-gradient(160deg,var(--teal-2),var(--teal));box-shadow:0 6px 13px -6px rgba(14,67,60,.9);
+    transform:translateX(calc(var(--i) * 100%));transition:transform .28s cubic-bezier(.45,1.5,.5,1)}
+  .seg .seg-opt{position:relative;z-index:2;flex:1;min-width:0;border:none;background:transparent;padding:9px 3px;
+    font-family:'Hanken Grotesk';font-weight:700;font-size:11.5px;color:var(--muted);cursor:pointer;transition:color .2s;white-space:nowrap}
+  .seg .seg-opt.on{color:#fff}
+  .seg .seg-opt:active{transform:scale(.94)}
+  .subseg{margin-top:9px;background:var(--gold-soft);border-color:#ecd9a8}
+  .subseg .seg-ind{background:linear-gradient(160deg,#e8b24a,#d9a441)}
+
+  /* ---- general settings ---- */
+  .gsec{font-family:'Hanken Grotesk';font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin:16px 4px 9px}
+  .gcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:6px}
+  .grow{display:flex;align-items:center;gap:12px;padding:13px 14px;border-bottom:1px solid var(--line)}
+  .grow:last-child{border-bottom:none}
+  .grow .gic{width:34px;height:34px;border-radius:10px;background:var(--teal-soft);color:var(--teal);display:grid;place-items:center;flex-shrink:0}
+  .grow .gic svg{width:17px;height:17px}
+  .grow .gmain{flex:1;min-width:0}
+  .grow .gmain b{font-size:13.5px;color:var(--ink);font-weight:700;display:block;line-height:1.2}
+  .grow .gmain small{font-size:11px;color:var(--muted)}
+  .grow .gval{font-size:12px;color:var(--muted);font-weight:600}
+  .grow.danger .gic{background:var(--coral-soft);color:var(--coral)}
+  .grow.tap{cursor:pointer}
+  .grow.tap:active{background:var(--cream-2)}
+  .sw{width:44px;height:26px;border-radius:50px;background:var(--line);position:relative;flex-shrink:0;cursor:pointer;transition:.2s}
+  .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.3);transition:.2s}
+  .sw.on{background:var(--green)}
+  .sw.on::after{left:21px}
+  .gdanger{color:var(--coral)!important}
+
   .coinlayer{position:absolute;inset:0;z-index:120;pointer-events:none;overflow:hidden}
   .coin{position:absolute;font-size:22px;animation:coinfly .9s ease-out forwards}
   @keyframes coinfly{0%{transform:translateY(0) scale(.5);opacity:0}15%{opacity:1}100%{transform:translateY(-160px) translateX(var(--cx,0)) scale(1.1) rotate(var(--cr,0));opacity:0}}
@@ -517,9 +631,7 @@
   <!-- ============ SIDE INTRO ============ -->
   <div class="intro">
     <div class="logo">
-      <span class="mark">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M4 11h16M12 3l8 8-8 8M6 14v6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
+      <span class="mark"><img src="assets/logo.svg" alt="Landed"></span>
       <b>Landed</b>
     </div>
     <h1>Every newcomer deserves to know <em>what they're owed.</em></h1>
@@ -553,7 +665,7 @@
       <div class="login" id="login">
         <div class="login-top">
           <div class="lbrand">
-            <span class="lmark"><svg viewBox="0 0 24 24" fill="none"><path d="M4 11h16M12 3l8 8-8 8M6 14v6" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="lmark"><img src="assets/logo.svg" alt="Landed"></span>
             <b>Landed</b>
           </div>
           <h1>Know what you're <em>owed.</em></h1>
@@ -724,6 +836,7 @@
             </div>
           </div>
 
+          <div class="boardlabel" id="boardLabel"></div>
           <div class="levelmap" id="levelmap"></div>
           <div class="questfoot" id="questfoot"></div>
         </div>
@@ -895,22 +1008,39 @@
 
         <!-- ============ SETTINGS ============ -->
         <div class="view" id="view-settings">
-          <div class="vhead">
+          <div class="vhead" style="padding-bottom:6px">
             <div class="back" onclick="go('home')"><svg viewBox="0 0 24 24" fill="none" stroke="#1C2B28" stroke-width="2"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <h2>Your details</h2>
-            <p>Everything Landed holds about you. Remove anything you'd rather not store.</p>
+            <h2>Settings</h2>
+            <p>Your account — plus a living profile built from your story &amp; documents.</p>
           </div>
           <div class="pad">
-            <div class="sect-title"><h4>Your documents</h4><span id="docCount"></span></div>
-            <div id="docList"></div>
-
-            <div class="sect-title" style="margin-top:18px"><h4>About you</h4><span>from your chat</span></div>
-            <div id="infoList"></div>
-
-            <div class="nrpf" style="margin-top:16px">
-              <span class="w"><i data-lucide="shield-check"></i></span>
-              <p>Stored privately for this demo. Landed gives <b>information only</b>, not legal advice — for your case, check gov.uk and a regulated adviser.</p>
+            <div class="settabs">
+              <button class="settab on" id="settab-interactive" onclick="switchSettingsTab('interactive')"><i data-lucide="sparkles"></i> Interactive</button>
+              <button class="settab" id="settab-general" onclick="switchSettingsTab('general')"><i data-lucide="sliders-horizontal"></i> General</button>
             </div>
+
+            <!-- INTERACTIVE: dynamically built from story + scans -->
+            <div id="settings-interactive">
+              <div class="ibanner">
+                <div class="ib-ic"><i data-lucide="wand-sparkles"></i></div>
+                <div><b>Your living profile</b><span>Built from your documents &amp; story. Adjust anything — your matches update instantly.</span></div>
+              </div>
+              <div class="iresult" id="iresult"></div>
+
+              <div class="sect-title" style="margin-top:16px"><h4>From your documents</h4><span id="docCount"></span></div>
+              <div id="docList"></div>
+
+              <div class="sect-title" style="margin-top:18px"><h4>Tuned by you</h4><span>tap to adjust</span></div>
+              <div id="iControls"></div>
+
+              <div class="nrpf" style="margin-top:14px">
+                <span class="w"><i data-lucide="shield-check"></i></span>
+                <p>These answers personalise everything. Landed gives <b>information only</b>, not legal advice.</p>
+              </div>
+            </div>
+
+            <!-- GENERAL: regular app settings -->
+            <div id="settings-general" style="display:none"></div>
           </div>
         </div>
 
@@ -1127,26 +1257,61 @@
 
   const money = n => '£'+n.toLocaleString('en-GB');
 
+  /* ---- England-themed boards, chosen by what you're eligible for ---- */
+  const BOARDS = {
+    education:'assets/board-education.png', health:'assets/board-health.png',
+    council:'assets/board-housing.png', water:'assets/board-housing.png',
+    welfare:'assets/board-housing.png', utilities:'assets/board-work.png',
+    business:'assets/board-work.png', transport:'assets/board-work.png'
+  };
+  const BOARD_LABEL = {
+    education:'University Town', health:'Wellbeing District',
+    council:'Council Quarter', water:'Council Quarter', welfare:'Council Quarter',
+    utilities:'Market High Street', business:'Market High Street', transport:'Market High Street'
+  };
+  function topCategory(){
+    const elig = ENGINE.filter(b=>b.status==='eligible').slice().sort((a,b)=>b.score-a.score);
+    return elig.length ? elig[0].g : 'education';
+  }
+  // the hero "rags-to-riches" board: grotty estate at the bottom → posh & rich at the top
+  function chooseBoard(){ return 'assets/board-progress.png'; }
+  function boardVibe(){
+    if(CLEARABLE>0 && progress>=CLEARABLE) return 'Living the dream';
+    if(CLEARABLE>0 && progress>=Math.ceil(CLEARABLE*0.6)) return 'Moving on up';
+    if(progress>=Math.max(1, Math.ceil(CLEARABLE*0.3))) return 'On the up';
+    return 'The rough end';
+  }
+
   function renderMap(){
     const map = document.getElementById('levelmap');
     if(!map) return;
     const W = map.clientWidth || 348;
-    const cx0 = W/2, amp = Math.min(112, W*0.31), sp = 122, topPad = 52;
-    const pts = LEVELS.map((lv,i)=>({x: cx0 + Math.sin(i*0.8+0.6)*amp, y: topPad + i*sp}));
-    const H = topPad + (LEVELS.length-1)*sp + 96;
+    const cx0 = W/2, amp = Math.min(60, W*0.17), sp = 132, topPad = 84;
+    const N = LEVELS.length;
+    // bottom → top: level 0 sits at the BOTTOM, the finish/grand-prize is at the TOP (Candy-Crush style)
+    const pts = LEVELS.map((lv,i)=>({x: cx0 + Math.sin(i*0.8+0.6)*amp, y: topPad + (N - i)*sp}));
+    const finishPt = { x: cx0, y: topPad };
+    const allPts = pts.concat([finishPt]);   // ordered bottom → top so the lit road grows upward
+    const H = topPad + N*sp + 96;
     map.style.height = H+'px';
+    map.style.setProperty('--board', `url('${chooseBoard()}')`);
+    const bl = document.getElementById('boardLabel');
+    if(bl){ bl.innerHTML = `<i data-lucide="trending-up"></i> England · ${boardVibe()}`; }
 
-    // connector segments
-    let segs='';
-    for(let i=0;i<pts.length-1;i++){
-      const a=pts[i], b=pts[i+1], m=(a.y+b.y)/2;
-      const d=`M ${a.x} ${a.y} C ${a.x} ${m}, ${b.x} ${m}, ${b.x} ${b.y}`;
-      const lit = (i+1) <= progress ? ' lit' : '';
-      segs += `<path class="seg${lit}" d="${d}"/>`;
+    // one continuous winding road through every node + the finish
+    let d = `M ${allPts[0].x} ${allPts[0].y}`;
+    for(let i=0;i<allPts.length-1;i++){
+      const a=allPts[i], b=allPts[i+1], m=(a.y+b.y)/2;
+      d += ` C ${a.x} ${m}, ${b.x} ${m}, ${b.x} ${b.y}`;
     }
-    let svg = `<svg class="track" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+    const svg = `<svg class="track" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
       <defs><linearGradient id="litgrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#7be0a0"/><stop offset="1" stop-color="#2f8a55"/></linearGradient></defs>${segs}</svg>`;
+        <stop offset="0" stop-color="#ffd76a"/><stop offset="0.55" stop-color="#f0a64a"/><stop offset="1" stop-color="#3fa066"/></linearGradient></defs>
+      <path class="road-casing" d="${d}"/>
+      <path class="road-base" d="${d}"/>
+      <path class="road-dots" d="${d}"/>
+      <path class="road-lit" id="road-lit" d="${d}"/>
+    </svg>`;
 
     // nodes
     let nodes='';
@@ -1154,7 +1319,7 @@
       const p=pts[i];
       let state, extra='', stars='', award;
       if(i<progress){ state='done'; stars='<div class="stars"><i data-lucide="star"></i><i data-lucide="star"></i><i data-lucide="star"></i></div>'; award=`<div class="award win">${money(lv.award)} won</div>`; }
-      else if(i===progress && !lv.locked){ state='now'; extra='<div class="ring"></div><div class="play"><i data-lucide="play"></i>PLAY</div>'; award=`<div class="award">Win ${money(lv.award)}</div>`; }
+      else if(i===progress && !lv.locked){ state='now'; extra='<div class="ring"></div><div class="ring r2"></div><div class="play"><i data-lucide="play"></i>PLAY</div>'; award=`<div class="award">Win ${money(lv.award)}</div>`; }
       else { state='locked'; award=`<div class="award">Win ${money(lv.award)}</div>`; }
       const num = lv.locked ? '<i data-lucide="lock"></i>' : (i+1);
       nodes += `<div class="lvl ${state}" style="left:${p.x}px;top:${p.y}px" onclick="tapLevel(${i})">
@@ -1163,8 +1328,21 @@
         ${award}
       </div>`;
     });
+    // grand-prize finish marker
+    nodes += `<div class="lvl finish" style="left:${finishPt.x}px;top:${finishPt.y}px">
+      <div class="finbanner">GRAND PRIZE</div>
+      <div class="face"><i data-lucide="trophy"></i></div>
+      <div class="award">Unlock everything</div>
+    </div>`;
 
     map.innerHTML = svg + nodes;
+    // light the road up to the current level
+    const litEl = map.querySelector('#road-lit');
+    if(litEl){
+      const total = litEl.getTotalLength();
+      const frac = (allPts.length>1) ? Math.max(0, Math.min(1, progress/(allPts.length-1))) : 0;
+      litEl.style.strokeDasharray = (total*frac) + ' ' + total;
+    }
     renderQuestFoot();
     updatePot();
     icons();
@@ -1270,43 +1448,258 @@
     renderMap();
   }
 
-  /* ============ SETTINGS (docs + stored info, deletable) ============ */
-  async function openSettings(){
-    const docList = document.getElementById('docList');
-    const infoList = document.getElementById('infoList');
-    if(!docList) return;
-    docList.innerHTML = '<div class="smuted">Loading…</div>'; infoList.innerHTML='';
+  /* ===================================================================
+     INTERACTIVE SETTINGS
+     The settings panel is generated from the user's story answers + the
+     facts read off their document scans. Each fact becomes a live control;
+     changing one re-runs the engine and reshapes the Benefit Quest.
+  =================================================================== */
+
+  // the canonical fields (aligned to the ENTITLED logic flow)
+  const PROFILE_FIELDS = [
+    { key:'basis', label:'How you came to the UK', icon:'compass',
+      options:[{v:'eu',t:'EU/EEA'},{v:'visa',t:'Visa'},{v:'settled',t:'Settled'},{v:'unsure',t:'Unsure'}] },
+    { key:'status', label:'Current status', icon:'id-card',
+      optionsBy:{
+        eu:[{v:'presettled',t:'Pre-settled'},{v:'settledstatus',t:'Settled'},{v:'noeuss',t:'No EUSS'},{v:'unsure',t:'Unsure'}],
+        visa:[{v:'student',t:'Student'},{v:'worker',t:'Worker'},{v:'spouse',t:'Partner'},{v:'other',t:'Other'}],
+        settled:[{v:'ilr',t:'Have ILR'},{v:'british',t:'British'}],
+        unsure:[{v:'unsure',t:'Show all'}] } },
+    { key:'years', label:'Years in the UK', icon:'calendar-days',
+      options:[{v:'u1',t:'<1'},{v:'1-3',t:'1–3'},{v:'3-5',t:'3–5'},{v:'5-10',t:'5–10'},{v:'10+',t:'10+'}] },
+    { key:'kids', label:'UK-born children', icon:'baby', type:'toggle',
+      sub:[{v:'born',t:'Under 18'},{v:'born10',t:'Here 10+ yrs'}] },
+    { key:'money', label:'Household money', icon:'wallet',
+      options:[{v:'ok',t:'Managing'},{v:'low',t:'Tight'},{v:'student',t:'Student'},{v:'pension',t:'66+'}] }
+  ];
+  function optionsFor(field, est){
+    if(field.optionsBy) return field.optionsBy[est.basis || 'unsure'] || field.optionsBy.unsure;
+    return field.options || [];
+  }
+  function allOptions(f){ return f.options || f.sub || Object.values(f.optionsBy||{}).flat(); }
+  function fieldLabel(key){ const f=PROFILE_FIELDS.find(x=>x.key===key); return f?f.label:key; }
+  function optLabel(key,code){
+    const f=PROFILE_FIELDS.find(x=>x.key===key); if(!f) return code;
+    const o=allOptions(f).find(o=>o.v===code);
+    return o ? o.t : ({no:'None', born:'Under 18', born10:'Here 10+ yrs'}[code] || code);
+  }
+  // best-effort: infer a canonical code from a stored human phrase (legacy facts)
+  function inferCode(key,value){
+    const f=PROFILE_FIELDS.find(x=>x.key===key); if(!f) return null;
+    const all=allOptions(f); const v=(value||'').toLowerCase();
+    if(key==='kids'){ if(/no\b|none|not/.test(v)) return 'no'; if(/10\+|10 \+|ten/.test(v)) return 'born10'; if(/child|kid|born|yes/.test(v)) return 'born'; }
+    const hit=all.find(o=>v.includes(o.t.toLowerCase().split(' ')[0]) || v.includes(o.v));
+    return hit?hit.v:null;
+  }
+
+  let estate = {};
+  let settingsTab = 'interactive';
+  let _profile = { documents:[], info:[] };
+
+  async function loadProfile(){
     try{
       const r = await fetch('/api/profile?user=' + encodeURIComponent(currentUser()));
-      const data = await r.json();
-      const docs = data.documents || [];
-      document.getElementById('docCount').textContent = docs.length + ' on file';
-      docList.innerHTML = docs.length ? docs.map(d=>`
-        <div class="srow">
-          <div class="srow-ic"><i data-lucide="file-text"></i></div>
-          <div class="srow-main"><b>${escapeHtml(d.name)}</b><small>${escapeHtml(d.type||'')}${d.summary?' · '+escapeHtml(d.summary):''}</small></div>
-          <button class="del" title="Delete document" onclick="deleteDoc('${escapeHtml(d.id)}')"><i data-lucide="trash-2"></i></button>
-        </div>`).join('') : '<div class="smuted">No documents on file.</div>';
+      _profile = await r.json();
+    }catch(e){ _profile = _profile || { documents:[], info:[] }; }
+    rebuildEstate();
+  }
+  function rebuildEstate(){
+    estate = {};
+    (_profile.documents||[]).forEach(d=>Object.assign(estate, d.facts||{}));
+    (_profile.info||[]).forEach(b=>{ const k=b.key||guessKeyLocal(b.label); const code=b.code||inferCode(k,b.value); if(k&&code) estate[k]=code; });
+  }
+  function guessKeyLocal(label){ const l=(label||'').toLowerCase();
+    if(l.includes('basis')||l.includes('came')) return 'basis';
+    if(l.includes('status')) return 'status';
+    if(l.includes('year')) return 'years';
+    if(l.includes('child')||l.includes('kid')) return 'kids';
+    if(l.includes('money')||l.includes('income')||l.includes('household')) return 'money';
+    return null;
+  }
 
-      const info = data.info || [];
-      infoList.innerHTML = info.length ? info.map(b=>`
-        <div class="srow">
-          <div class="bullet">•</div>
-          <div class="srow-main"><b>${escapeHtml(b.value)}</b><small>${escapeHtml(b.label)}</small></div>
-          <button class="del" title="Delete" onclick="deleteInfo(${b.index})"><i data-lucide="trash-2"></i></button>
-        </div>`).join('') : '<div class="smuted">Nothing yet — chat with Landed in the Story tab and your answers appear here.</div>';
-      icons();
-    }catch(e){
-      docList.innerHTML = '<div class="smuted">Backend not reachable. Run <b>node server.js</b> to enable saved details.</div>';
+  // map the canonical profile onto the quest engine + recompute
+  function estToProfile(){
+    const e = estate;
+    if(e.status==='student'){ PROFILE.visa='Student'; PROFILE.fullTimeStudent=true; }
+    else if(e.status==='worker'){ PROFILE.visa='Worker'; PROFILE.fullTimeStudent=false; }
+    else if(e.status==='spouse'){ PROFILE.visa='Family'; PROFILE.fullTimeStudent=false; }
+    else if(e.status==='ilr'||e.status==='british'||e.status==='settledstatus'){ PROFILE.fullTimeStudent=false; }
+    if(e.basis==='visa') PROFILE.nrpf=true;
+    else if(e.basis==='settled'||e.basis==='eu') PROFILE.nrpf=false;
+    if(e.money) PROFILE.lowIncome = (e.money==='low'||e.money==='student'||e.money==='pension');
+    if(e.kids) PROFILE.hasChildren = (e.kids==='born'||e.kids==='born10');
+    recompute();
+    progress = Math.min(progress, CLEARABLE);
+    updateHome();
+  }
+
+  async function openSettings(){
+    const ctr = document.getElementById('iControls');
+    if(!ctr) return;
+    ctr.innerHTML = '<div class="smuted">Loading your profile…</div>';
+    await loadProfile();
+    estToProfile();            // settings reflect stored profile + drive the quest
+    renderInteractive();
+    renderGeneral();
+    switchSettingsTab(settingsTab);
+  }
+  function switchSettingsTab(t){
+    settingsTab = t;
+    document.getElementById('settab-interactive').classList.toggle('on', t==='interactive');
+    document.getElementById('settab-general').classList.toggle('on', t==='general');
+    document.getElementById('settings-interactive').style.display = t==='interactive' ? 'block':'none';
+    document.getElementById('settings-general').style.display = t==='general' ? 'block':'none';
+  }
+
+  function resultBannerHtml(){
+    const elig = ENGINE.filter(b=>b.status==='eligible');
+    const locked = ENGINE.filter(b=>b.status==='locked');
+    const support = elig.filter(b=>b.support).reduce((s,b)=>s+b.value,0);
+    return `<div class="ir-num" id="irNum">${elig.length}</div>
+      <div class="ir-main"><b>benefits you may qualify for</b>
+        <span>worth up to <b>${money(support)}</b>/yr${locked.length?` · ${locked.length} need a document`:''}</span></div>
+      <button class="ir-go" onclick="go('matches')">Quest <i data-lucide="arrow-right"></i></button>`;
+  }
+
+  function renderInteractive(){
+    const docFacts = {};
+    (_profile.documents||[]).forEach(d=>Object.entries(d.facts||{}).forEach(([k,v])=>docFacts[k]=v));
+    const infoMap = {};
+    (_profile.info||[]).forEach(b=>{ const k=b.key||guessKeyLocal(b.label); if(k) infoMap[k]=b; });
+
+    document.getElementById('iresult').innerHTML = resultBannerHtml();
+
+    // documents → fact pills
+    const docs = _profile.documents || [];
+    document.getElementById('docCount').textContent = docs.length + ' scanned';
+    document.getElementById('docList').innerHTML = docs.length ? docs.map(d=>{
+      const facts = Object.entries(d.facts||{}).map(([k,v])=>`<span class="dfact">${escapeHtml(fieldLabel(k))}: ${escapeHtml(optLabel(k,v))}</span>`).join('');
+      return `<div class="srow">
+        <div class="srow-ic"><i data-lucide="file-text"></i></div>
+        <div class="srow-main"><b>${escapeHtml(d.name)}</b><div class="dfacts">${facts||'<span class="dfact muted">no fields read</span>'}</div></div>
+        <button class="del" title="Remove document" onclick="deleteDoc('${escapeHtml(d.id)}')"><i data-lucide="trash-2"></i></button>
+      </div>`;
+    }).join('') : '<div class="smuted">No documents scanned. Add one from the Scan tab.</div>';
+
+    // completeness meter + one control card per field
+    const setCount = PROFILE_FIELDS.filter(f=>estate[f.key]!=null).length;
+    const meter = `<div class="imeter"><div class="imeter-bar"><i style="width:${setCount/PROFILE_FIELDS.length*100}%"></i></div><span>${setCount} of ${PROFILE_FIELDS.length} set</span></div>`;
+    document.getElementById('iControls').innerHTML = meter + PROFILE_FIELDS.map(f=>renderControl(f, docFacts, infoMap)).join('');
+    icons();
+  }
+
+  // one settings card — sliding segmented control, or a toggle (children)
+  function renderControl(f, docFacts, infoMap){
+    let src;
+    if(docFacts[f.key]!=null) src = `<span class="csrc doc"><i data-lucide="file-text"></i> from documents</span>`;
+    else if(infoMap[f.key]!=null) src = `<span class="csrc"><i data-lucide="message-circle"></i> from your story</span>`;
+    else src = `<span class="csrc none">not set</span>`;
+    const clr = (infoMap[f.key]!=null) ? `<button class="cclear" title="Clear" onclick="clearField('${f.key}',${infoMap[f.key].index})"><i data-lucide="x"></i></button>` : '';
+
+    if(f.type === 'toggle'){
+      const on = estate[f.key]==='born' || estate[f.key]==='born10';
+      let sub = '';
+      if(on){
+        const i = Math.max(0, f.sub.findIndex(o=>o.v===estate[f.key]));
+        sub = `<div class="seg subseg" style="--n:${f.sub.length};--i:${i}"><span class="seg-ind"></span>${
+          f.sub.map(o=>`<button class="seg-opt ${estate[f.key]===o.v?'on':''}" onclick="setField('${f.key}','${o.v}')">${escapeHtml(o.t)}</button>`).join('')}</div>`;
+      }
+      return `<div class="ctrl">
+        <div class="ctrl-h"><div class="ctrl-ic"><i data-lucide="${f.icon}"></i></div>
+          <div class="ctrl-t"><b>${escapeHtml(f.label)}</b>${src}</div>
+          <div class="sw ${on?'on':''}" onclick="setField('${f.key}','${on?'no':'born'}')"></div></div>
+        ${sub}
+      </div>`;
     }
+
+    const opts = optionsFor(f, estate);
+    const sel = estate[f.key];
+    const idx = opts.findIndex(o=>o.v===sel);
+    const seg = `<div class="seg" style="--n:${opts.length};--i:${Math.max(0,idx)}">
+      <span class="seg-ind"${idx<0?' style="opacity:0"':''}></span>
+      ${opts.map(o=>`<button class="seg-opt ${o.v===sel?'on':''}" onclick="setField('${f.key}','${o.v}')">${escapeHtml(o.t)}</button>`).join('')}</div>`;
+    return `<div class="ctrl">
+      <div class="ctrl-h"><div class="ctrl-ic"><i data-lucide="${f.icon}"></i></div>
+        <div class="ctrl-t"><b>${escapeHtml(f.label)}</b>${src}</div>${clr}</div>
+      ${seg}
+    </div>`;
+  }
+
+  async function setField(key, code){
+    estate[key] = code;
+    const f = PROFILE_FIELDS.find(x=>x.key===key);
+    const value = optLabel(key, code);
+    estToProfile();                 // live: reshape the quest immediately
+    renderInteractive();
+    const num = document.getElementById('irNum'); if(num){ num.classList.add('iflash'); setTimeout(()=>num.classList.remove('iflash'),520); }
+    if(document.getElementById('view-matches').classList.contains('active')) renderMap();
+    // persist to the per-user markdown + refresh source tags
+    try{
+      await fetch('/api/profile/info', {method:'POST', headers:{'content-type':'application/json'},
+        body: JSON.stringify({ user: currentUser(), key, code, label: f.label, value })});
+      await loadProfile(); renderInteractive();
+    }catch(e){}
+  }
+  async function clearField(key, index){
+    delete estate[key];
+    estToProfile(); renderInteractive();
+    if(document.getElementById('view-matches').classList.contains('active')) renderMap();
+    try{
+      await fetch('/api/profile/info?user='+encodeURIComponent(currentUser())+'&index='+index, {method:'DELETE'});
+      await loadProfile(); renderInteractive();
+    }catch(e){}
   }
   async function deleteDoc(id){
-    await fetch('/api/profile/doc?user='+encodeURIComponent(currentUser())+'&id='+encodeURIComponent(id), {method:'DELETE'});
-    openSettings();
+    _profile.documents = (_profile.documents||[]).filter(d=>d.id!==id);
+    rebuildEstate(); estToProfile(); renderInteractive();
+    if(document.getElementById('view-matches').classList.contains('active')) renderMap();
+    try{
+      await fetch('/api/profile/doc?user='+encodeURIComponent(currentUser())+'&id='+encodeURIComponent(id), {method:'DELETE'});
+      await loadProfile(); renderInteractive();
+    }catch(e){}
   }
-  async function deleteInfo(index){
-    await fetch('/api/profile/info?user='+encodeURIComponent(currentUser())+'&index='+index, {method:'DELETE'});
-    openSettings();
+
+  /* ---- General settings (regular) ---- */
+  function renderGeneral(){
+    const el = document.getElementById('settings-general');
+    if(!el) return;
+    const email = currentUser();
+    el.innerHTML = `
+      <div class="gsec">Account</div>
+      <div class="gcard">
+        <div class="grow"><div class="gic"><i data-lucide="user"></i></div><div class="gmain"><b>Amara</b><small>${escapeHtml(email)}</small></div></div>
+        <div class="grow tap" onclick="logout()"><div class="gic"><i data-lucide="log-out"></i></div><div class="gmain"><b>Log out</b><small>Return to the login screen</small></div></div>
+      </div>
+
+      <div class="gsec">Notifications</div>
+      <div class="gcard">
+        <div class="grow"><div class="gic"><i data-lucide="bell"></i></div><div class="gmain"><b>Claim reminders</b><small>Nudge me about deadlines</small></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="grow"><div class="gic"><i data-lucide="sparkles"></i></div><div class="gmain"><b>New matches</b><small>When fresh benefits appear</small></div><div class="sw on" onclick="this.classList.toggle('on')"></div></div>
+        <div class="grow"><div class="gic"><i data-lucide="users"></i></div><div class="gmain"><b>Community updates</b><small>Success-rate changes</small></div><div class="sw" onclick="this.classList.toggle('on')"></div></div>
+      </div>
+
+      <div class="gsec">Preferences</div>
+      <div class="gcard">
+        <div class="grow"><div class="gic"><i data-lucide="globe"></i></div><div class="gmain"><b>Region</b></div><div class="gval">England</div></div>
+        <div class="grow"><div class="gic"><i data-lucide="languages"></i></div><div class="gmain"><b>Language</b></div><div class="gval">English (UK)</div></div>
+        <div class="grow"><div class="gic"><i data-lucide="palette"></i></div><div class="gmain"><b>Theme</b></div><div class="gval">Warm</div></div>
+      </div>
+
+      <div class="gsec">Privacy &amp; data</div>
+      <div class="gcard">
+        <div class="grow"><div class="gic"><i data-lucide="lock"></i></div><div class="gmain"><b>Your data stays on-device</b><small>Stored locally for this demo</small></div></div>
+        <div class="grow tap danger" onclick="deleteAllData()"><div class="gic"><i data-lucide="trash-2"></i></div><div class="gmain"><b class="gdanger">Delete all my data</b><small>Wipe documents &amp; saved answers</small></div></div>
+      </div>
+
+      <div class="gsec">About</div>
+      <div class="gcard">
+        <div class="grow"><div class="gic"><i data-lucide="info"></i></div><div class="gmain"><b>Landed</b><small>Prototype · v1.0 · information only, not legal advice</small></div></div>
+      </div>`;
+    icons();
+  }
+  async function deleteAllData(){
+    try{ await fetch('/api/profile/all?user='+encodeURIComponent(currentUser()), {method:'DELETE'}); }catch(e){}
+    await openSettings();
   }
 
   // benefits the engine hid because of the NRPF visa condition
